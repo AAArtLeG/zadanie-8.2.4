@@ -31,7 +31,7 @@ void numap_destroy(NUMAP* to_destroy)
     free(to_destroy);
 }
 
-char numap_id(NUMAP* to_redef, unsigned int size)
+NUMAP* numap_id(NUMAP* to_redef, unsigned int size)
 {
     to_redef->size_d = size;
     to_redef->size_cod = size;
@@ -40,22 +40,44 @@ char numap_id(NUMAP* to_redef, unsigned int size)
     {
         to_redef->map[i] = i;
     }
-    return('S');
+    return(to_redef);
+}
+
+NUMAP* create_zob(NUMAP* f, unsigned int size)
+{
+    f->size_d = size;
+    f->size_cod = 3 * size;
+    for (int i = 0; i < f->size_d; i++)
+    {
+        f->map[i] = 2 * i + 1;
+    }
+    return(f);
 }
 
 void numap_print(NUMAP* f)
 {
-    for (int i = 0; i < f->size_d; f++)
+    for (int i = 0; i < f->size_d; i++)
     {
-        printf("%d %f\n", i, f->map[i]);
+        printf("%d %d\n", i, f->map[i]);
     }
+}
+
+NUMAP* numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
+{
+
 }
 
 
 
 int main()
 {
-    
+    NUMAP* test = numap_create_empty();
+    unsigned int size = 5;
+    test = numap_id(test, size);
+    numap_print(test);
+    test = create_zob(test, size);
+    numap_print(test);
+    numap_destroy(test);
 }
 
 
