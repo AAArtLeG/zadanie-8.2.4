@@ -62,15 +62,27 @@ void numap_print(NUMAP* f)
     }
 }
 
-NUMAP* numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
+char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
 {
-
+    for (int i = 0; i < cycle_type->size; i++) {
+        int temp = cycle_type->seq[i];
+        for (int j = 0; j < temp; j++) {
+            int a = rand() % to_redef->size_d;
+            int b = rand() % to_redef->size_d;
+            while (b == a) {
+                b = rand() % to_redef->size_d;
+            }
+        }
+    }
+    return 0;
 }
+
 
 
 
 int main()
 {
+    srand(time(0));
     NUMAP* test = numap_create_empty();
     unsigned int size = 5;
     test = numap_id(test, size);
