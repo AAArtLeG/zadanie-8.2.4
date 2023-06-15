@@ -72,6 +72,10 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             while (b == a) {
                 b = rand() % to_redef->size_d;
             }
+            int t = to_redef->map[a];
+            to_redef->map[a] = to_redef->map[b];
+            to_redef->map[b] = t;
+            numap_print(to_redef);
         }
     }
     return 0;
@@ -86,10 +90,17 @@ int main()
     NUMAP* test = numap_create_empty();
     unsigned int size = 5;
     test = numap_id(test, size);
-    numap_print(test);
+    //numap_print(test);
     test = create_zob(test, size);
     numap_print(test);
     numap_destroy(test);
+    SEQ* a = (SEQ*)malloc(sizeof(SEQ));
+    a->size = 1;
+    a->seq = (unsigned int*)malloc(sizeof(int) * a->size);
+    a->seq[0] = 1;
+    printf("%d\n", a->seq[0]);
+    numap_rand_perm_cycle_type(test, a);
+    numap_print(test);
 }
 
 
