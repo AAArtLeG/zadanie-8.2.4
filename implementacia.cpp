@@ -132,6 +132,8 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             to_redef->map[a[j]] = b[j];
         }
         numap_print(to_redef);
+        free(a);
+        free(b);
     }
     return 0;
 }
