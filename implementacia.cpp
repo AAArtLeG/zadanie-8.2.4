@@ -9,8 +9,14 @@ int main()
     NUMAP* test = numap_create_empty();
     unsigned int size = 10;
     test = numap_id(test, size);
+    if (test == NULL) {
+        return 1;
+    }
     //numap_print(test);
     test = create_zob(test, size);
+    if (test == NULL) {
+        return 1;
+    }
     numap_print(test);
     //numap_destroy(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
@@ -23,6 +29,7 @@ int main()
     numap_rand_perm_cycle_type(test, a);
     printf("\n\n\n");
     numap_print(test);
+    return 0;
 }
 
 
