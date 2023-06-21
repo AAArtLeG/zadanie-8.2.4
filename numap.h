@@ -27,4 +27,6 @@ void numap_print(NUMAP* f);
 
 bool search(int* a, int x, int size);
 
+int* push_back(int* arr, int* size_arr, int* add, int* size_add);
+
 char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type);

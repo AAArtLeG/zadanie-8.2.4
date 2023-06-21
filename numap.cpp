@@ -67,51 +67,106 @@ bool search(int* a, int x, int size)
     return false;
 }
 
+int* push_back(int* arr, unsigned int* size_arr, int* add, unsigned int* size_add)
+{
+    if (*size_arr == 0)
+    {
+        arr = (int*)malloc((*size_add) * sizeof(int));
+        for (int i = 0; i < (*size_add); i++) {
+            arr[i] = add[i];
+        }
+        *size_arr = *size_add;
+        return arr;
+    }
+    int* temp = (int*)malloc((*size_arr) * sizeof(int));
+    for (int i = 0; i < (*size_add); i++) {
+        temp[i] = arr[i];
+    }
+    *size_arr = *size_arr + *size_add;
+    if (temp == NULL) {
+        return NULL;
+    }
+    free(arr);
+    arr = (int*)malloc((*size_arr) * sizeof(int));
+    if (arr == NULL) {
+        free(temp);
+        return NULL;
+    }
+    for (int i = 0; i < (*size_arr - *size_add); i++)
+    {
+        arr[i] = temp[i];
+    }
+    for (int i = (*size_arr - *size_add); i < *size_arr; i++)
+    {
+        arr[i] = add[i - (*size_arr - *size_add)];
+    }
+    free(temp);
+    return(arr);
+}
+
 char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
 {
+    numap_print(to_redef);
+    unsigned int size = 0;
+    int* cycle = NULL;
     for (int i = 0; i < cycle_type->size; i++) {
         int temp = cycle_type->seq[i];
         int* a = (int*)malloc(sizeof(int) * temp);
-        int size = 0;
+        unsigned int size_new = 0;
+        printf("\n\n\n a");
         for (int j = 0; j < temp; j++) {
             int x = rand() % (to_redef->size_d);
-            //printf("%d ", x);
+            printf("%d ", x);
             if (j == 0) {
                 a[0] = x;
-                size++;
+                size_new++;
                 continue;
             }
             while (true) {
-                if (search(a, x, size))
+                if (search(a, x, size_new))
                     x = rand() % (to_redef->size_d);
                 else
                     break;
 
             }
             a[j] = x;
-            size++;
+            size_new++;
             //numap_print(to_redef);
         }
-        //printf("\n");
+        printf("\n");
         int* b = (int*)malloc(sizeof(int) * temp);
         for (int j = 0; j < temp; j++) {
-            if ((j + 1) != size) {
+            if ((j + 1) != size_new) {
                 b[j] = to_redef->map[a[j + 1]];
             }
             else {
                 b[j] = to_redef->map[a[0]];
             }
         }
-        //for (int j = 0; j < temp; j++) {
-        //    printf("%d ", b[j]);
-        //}
-        //printf("\n");
+        printf("\n b");
         for (int j = 0; j < temp; j++) {
-            to_redef->map[a[j]] = b[j];
+            printf("%d ", b[j]);
         }
-        numap_print(to_redef);
+        printf("\n");
+        /*for (int j = 0; j < temp; j++) {
+            to_redef->map[a[j]] = b[j];
+        }*/
+        cycle = push_back(cycle, &size, b, &size_new);
+        printf("\n cycle ");
+        for (int i = 0; i < size; i++) {
+            printf("%d ", cycle[i]);
+        }
+        printf("\n\n\n");
+        //numap_print(to_redef);
         free(a);
         free(b);
     }
-    return 0;
+    /*NUMAP* a = numap_create_empty();
+    to_redef->map = cycle;
+    to_redef->size_d = size;
+    printf("\n map");*/
+    //numap_print(to_redef);
+    to_redef->map = cycle;
+    to_redef->size_d = size;
+    return 0; 
 }
