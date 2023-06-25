@@ -155,6 +155,11 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             }
         }
         cycle = push_back(cycle, &size, b, &size_new);
+        if (cycle == NULL) {
+            to_redef->size_d = 0;
+            to_redef->map = NULL;
+            return -1;
+        }
         free(a);
         free(b);
     }
