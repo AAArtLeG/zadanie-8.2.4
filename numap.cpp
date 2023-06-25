@@ -57,22 +57,6 @@ void numap_print(NUMAP* f)
     printf("\n");
 }
 
-bool search(int* a, int x, int size)
-{
-    int f = 0;
-    int l = size - 1;
-    while (f <= l) {
-        int mid = l + (f - l) / 2;
-        if (x == a[mid])
-            return true;
-        if (x > a[mid])
-            f = mid + 1;
-        if (x < a[mid])
-            l = mid - 1;
-    }
-    return false;
-}
-
 int* push_back(int* arr, unsigned int* size_arr, int* add, unsigned int* size_add)
 {
     if (*size_arr == 0)
@@ -127,20 +111,7 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         }
         unsigned int size_new = 0;
         for (int j = 0; j < temp; j++) {
-            int x = rand() % (to_redef->size_d);
-            if (j == 0) {
-                a[0] = x;
-                size_new++;
-                continue;
-            }
-            while (true) {
-                if (search(a, x, size_new))
-                    x = rand() % (to_redef->size_d);
-                else
-                    break;
-
-            }
-            a[j] = x;
+            a[j] = size + j;
             size_new++;
         }
         int* b = (int*)malloc(sizeof(int) * temp);
@@ -152,10 +123,10 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         }
         for (int j = 0; j < temp; j++) {
             if ((j + 1) != size_new) {
-                b[j] = to_redef->map[a[j + 1]];
+                b[j] = a[j + 1];
             }
             else {
-                b[j] = to_redef->map[a[0]];
+                b[j] = a[0];
             }
         }
         cycle = push_back(cycle, &size, b, &size_new);
