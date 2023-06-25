@@ -121,7 +121,9 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         int temp = cycle_type->seq[i];
         int* a = (int*)malloc(sizeof(int) * temp);
         if (a == NULL) {
-            return NULL;
+            to_redef->size_d = 0;
+            to_redef->map = NULL;
+            return -1;
         }
         unsigned int size_new = 0;
         for (int j = 0; j < temp; j++) {
@@ -144,7 +146,9 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         int* b = (int*)malloc(sizeof(int) * temp);
         if (b == NULL) {
             free(a);
-            return NULL;
+            to_redef->size_d = 0;
+            to_redef->map = NULL;
+            return -1;
         }
         for (int j = 0; j < temp; j++) {
             if ((j + 1) != size_new) {
@@ -156,6 +160,8 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         }
         cycle = push_back(cycle, &size, b, &size_new);
         if (cycle == NULL) {
+            free(a);
+            free(b);
             to_redef->size_d = 0;
             to_redef->map = NULL;
             return -1;
@@ -165,5 +171,6 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
     }
     to_redef->map = cycle;
     to_redef->size_d = size;
+    to_redef->size_cod = size;
     return 0; 
 }

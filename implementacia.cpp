@@ -13,10 +13,10 @@ int main()
         return 1;
     }
     //numap_print(test);
-    test = create_zob(test, size);
+    /*test = create_zob(test, size);
     if (test == NULL) {
         return 1;
-    }
+    }*/
     numap_print(test);
     //numap_destroy(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
