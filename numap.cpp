@@ -40,11 +40,16 @@ char numap_id(NUMAP* to_redef, unsigned int size)
 
 NUMAP* create_zob(NUMAP* f, unsigned int size)
 {
+    free(f->map);
     f->size_d = size;
     f->size_cod = 3 * size;
+    f->map = (int*)malloc(sizeof(int) * size);
+    if (f->map == NULL) {
+        return NULL;
+    }
     for (int i = 0; i < f->size_d; i++)
     {
-        f->map[i] = 2 * i + 1;
+        f->map[i] = rand() % (3 * size);
     }
     return(f);
 }

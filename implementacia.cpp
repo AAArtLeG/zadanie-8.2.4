@@ -12,6 +12,10 @@ int main()
     if (t == 'F') {
         return -1;
     }
+    test = create_zob(test, size);
+    if (test == NULL) {
+        return - 1;
+    }
     numap_print(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
     a->size = 2;
