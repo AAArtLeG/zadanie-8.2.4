@@ -24,6 +24,7 @@ void numap_destroy(NUMAP* to_destroy)
 
 NUMAP* numap_id(NUMAP* to_redef, unsigned int size)
 {
+    free(to_redef->map);
     to_redef->size_d = size;
     to_redef->size_cod = size;
     to_redef->map = (int*)malloc(sizeof(int) * size);
