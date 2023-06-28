@@ -103,6 +103,16 @@ int* push_back(int* arr, unsigned int* size_arr, int* add, unsigned int* size_ad
     return(arr);
 }
 
+bool search(int* a, int size, int x)
+{
+    for (int i = 0; i < size; i++) {
+        if (a[i] == x) {
+            return true;
+        }
+    }
+    return false;
+}
+
 char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
 {
     unsigned int size = 0;
@@ -127,15 +137,37 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             to_redef->map = NULL;
             return -1;
         }
+        int size_b = 0;
         for (int j = 0; j < temp; j++) {
-            if ((j + 1) != size_new) {
-                b[j] = a[j + 1];
+            int x = rand() % temp;
+            if (size_b == 0) {
+                b[j] = x;
+                size_b++;
             }
-            else {
-                b[j] = a[0];
+            while (true) {
+                if (search(b, size_b, x)) {
+                    x = rand() % temp;
+                }
+                else {
+                    break;
+                }
+                
             }
+            b[j] = x;
+            size_b++;
         }
-        cycle = push_back(cycle, &size, b, &size_new);
+        int* c = (int*)malloc(sizeof(int) * temp);
+        if (c == NULL) {
+            free(a);
+            free(b);
+            to_redef->size_d = 0;
+            to_redef->map = NULL;
+            return -1;
+        }
+        for (int j = 0; j < temp; j++) {
+            c[j] = a[b[j]];
+        }
+        cycle = push_back(cycle, &size, c, &size_new);
         if (cycle == NULL) {
             free(a);
             free(b);
@@ -145,9 +177,10 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         }
         free(a);
         free(b);
+        free(c);
     }
     to_redef->map = cycle;
     to_redef->size_d = size;
     to_redef->size_cod = size;
-    return 0; 
+    return 0;
 }

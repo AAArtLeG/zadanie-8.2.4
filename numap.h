@@ -29,4 +29,6 @@ bool search(int* a, int x, int size);
 
 int* push_back(int* arr, unsigned int* size_arr, int* add, unsigned int* size_add);
 
+bool search(int* a, int size, int x);
+
 char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type);
