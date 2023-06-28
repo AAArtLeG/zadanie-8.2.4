@@ -8,9 +8,9 @@ int main()
     srand(time(0));
     NUMAP* test = numap_create_empty();
     unsigned int size = 10;
-    test = numap_id(test, size);
-    if (test == NULL) {
-        return 1;
+    char t = numap_id(test, size);
+    if (t == 'F') {
+        return -1;
     }
     numap_print(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));

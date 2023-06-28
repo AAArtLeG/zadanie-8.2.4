@@ -19,7 +19,7 @@ NUMAP* numap_create_empty();
 
 void numap_destroy(NUMAP* to_destroy);
 
-NUMAP* numap_id(NUMAP* to_redef, unsigned int size);
+char numap_id(NUMAP* to_redef, unsigned int size);
 
 NUMAP* create_zob(NUMAP* f, unsigned int size);
 

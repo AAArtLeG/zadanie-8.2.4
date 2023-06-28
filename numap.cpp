@@ -22,20 +22,20 @@ void numap_destroy(NUMAP* to_destroy)
     free(to_destroy);
 }
 
-NUMAP* numap_id(NUMAP* to_redef, unsigned int size)
+char numap_id(NUMAP* to_redef, unsigned int size)
 {
     free(to_redef->map);
     to_redef->size_d = size;
     to_redef->size_cod = size;
     to_redef->map = (int*)malloc(sizeof(int) * size);
     if (to_redef->map == NULL) {
-        return NULL;
+        return 'F';
     }
     for (int i = 0; i < size; i++)
     {
         to_redef->map[i] = i;
     }
-    return(to_redef);
+    return 'S';
 }
 
 NUMAP* create_zob(NUMAP* f, unsigned int size)
