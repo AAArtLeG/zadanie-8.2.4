@@ -29,13 +29,13 @@ char numap_id(NUMAP* to_redef, unsigned int size)
     to_redef->size_cod = size;
     to_redef->map = (int*)malloc(sizeof(int) * size);
     if (to_redef->map == NULL) {
-        return 'F';
+        return NUMAP_FAIL;
     }
     for (int i = 0; i < size; i++)
     {
         to_redef->map[i] = i;
     }
-    return 'S';
+    return NUMAP_SUCCESS;
 }
 
 NUMAP* create_zob(NUMAP* f, unsigned int size)
@@ -123,7 +123,7 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
         if (a == NULL) {
             to_redef->size_d = 0;
             to_redef->map = NULL;
-            return -1;
+            return NUMAP_FAIL;
         }
         unsigned int size_new = 0;
         for (int j = 0; j < temp; j++) {
@@ -135,7 +135,7 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             free(a);
             to_redef->size_d = 0;
             to_redef->map = NULL;
-            return -1;
+            return NUMAP_FAIL;
         }
         int x = rand() % temp;
         //printf("\n%d\n", x);
@@ -154,7 +154,7 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             free(b);
             to_redef->size_d = 0;
             to_redef->map = NULL;
-            return -1;
+            return NUMAP_FAIL;
         }
         free(a);
         free(b);
@@ -162,5 +162,5 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
     to_redef->map = cycle;
     to_redef->size_d = size;
     to_redef->size_cod = size;
-    return 0;
+    return NUMAP_SUCCESS;
 }

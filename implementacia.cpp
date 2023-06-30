@@ -9,7 +9,7 @@ int main()
     NUMAP* test = numap_create_empty();
     unsigned int size = 20;
     char t = numap_id(test, size);
-    if (t == 'F') {
+    if (t == NUMAP_FAIL) {
         return -1;
     }
     numap_print(test);

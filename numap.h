@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+const unsigned int NUMAP_SUCCESS = 0;
+const unsigned int NUMAP_FAIL = 1;
+
 typedef struct {
     unsigned int size_d;
     unsigned int size_cod;
