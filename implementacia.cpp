@@ -7,7 +7,7 @@ int main()
 {
     srand(time(0));
     NUMAP* test = numap_create_empty();
-    unsigned int size = 10;
+    unsigned int size = 20;
     char t = numap_id(test, size);
     if (t == 'F') {
         return -1;
@@ -16,8 +16,8 @@ int main()
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
     a->size = 2;
     a->seq = (unsigned int*)malloc(sizeof(int) * a->size);
-    a->seq[0] = 4;
-    a->seq[1] = 5;
+    a->seq[0] = 7;
+    a->seq[1] = 11;
     numap_rand_perm_cycle_type(test, a);
     printf("\n\n\n");
     numap_print(test);
