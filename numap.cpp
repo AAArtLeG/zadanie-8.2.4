@@ -73,7 +73,7 @@ int* push_back(int* arr, unsigned int* size_arr, int* add, unsigned int* size_ad
     if (temp == NULL)
         return NULL;
 
-    for (int i = 0; i < (*size_add); i++)
+    for (int i = 0; i < (*size_arr); i++)
         temp[i] = arr[i];
 
     *size_arr = *size_arr + *size_add;
@@ -134,7 +134,6 @@ char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
             else 
                 b[j] = a[j + x];
         }
-        
         cycle = push_back(cycle, &size, b, &size_new);
         if (cycle == NULL) {
             free(a);

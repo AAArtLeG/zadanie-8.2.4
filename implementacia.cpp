@@ -14,10 +14,12 @@ int main()
 
     numap_print(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
-    a->size = 2;
+    a->size = 4;
     a->seq = (unsigned int*)malloc(sizeof(int) * a->size);
     a->seq[0] = 7;
     a->seq[1] = 11;
+    a->seq[2] = 4;
+    a->seq[3] = 5;
     numap_rand_perm_cycle_type(test, a);
     printf("\n\n\n");
     numap_print(test);
