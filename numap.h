@@ -37,4 +37,4 @@ NUMAP* create_prot_perm_cycle_type(SEQ* cycle_type);
 
 char numap_perm_conjugation_with_swap(NUMAP* perm, unsigned int a, unsigned int b);
 
-char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type);
+NUMAP* numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type);

@@ -12,7 +12,7 @@ int main()
     if (t == NUMAP_FAIL)
         return -1;
 
-    numap_print(test);
+    //numap_print(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
     a->size = 2;
     a->seq = (unsigned int*)malloc(sizeof(int) * a->size);
@@ -22,13 +22,22 @@ int main()
     //a->seq[3] = 5;
     //numap_rand_perm_cycle_type(test, a);
     NUMAP* test2 = numap_create_empty();
+    t = numap_id(test2, size);
+    printf("\n\n\n");
+    numap_print(test2);
+    if (t == NUMAP_FAIL)
+        return -1;
     test2 = create_prot_perm_cycle_type(a);
     printf("\n\n\n");
     numap_print(test2);
     printf("numap domain: %d\n", test2->size_d);
     printf("numap codomain: %d\n", test2->size_cod);
     numap_perm_conjugation_with_swap(test2, 3, 7);
+    printf("\n\n\n g");
+    numap_print(test2);
+
     printf("\n\n\n");
+    test2 = numap_rand_perm_cycle_type(test2, a);
     numap_print(test2);
     return 0;
 }

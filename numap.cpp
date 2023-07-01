@@ -143,16 +143,44 @@ NUMAP* create_prot_perm_cycle_type(SEQ* cycle_type) {
 }
 
 char numap_perm_conjugation_with_swap(NUMAP* perm, unsigned int a, unsigned int b) {
-    for (int i = 0; i < 2; i++) {
-        int temp = perm->map[a - i];
-        perm->map[a - i] = perm->map[b - i];
-        perm->map[b - i] = temp;
+    int temp = perm->map[a];
+    perm->map[a] = perm->map[b];
+    perm->map[b] = temp;
+
+    int x;
+    int y;
+    for (int i = 0; i < perm->size_d; i++) {
+        if (a == perm->map[i]) {
+            x = i;
+        }
+        if (b == perm->map[i]) {
+            y = i;
+        }
     }
+
+    temp = perm->map[x];
+    perm->map[x] = perm->map[y];
+    perm->map[y] = temp;
 
     return NUMAP_SUCCESS;
 }
 
-char numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
+NUMAP* numap_rand_perm_cycle_type(NUMAP* to_redef, SEQ* cycle_type)
 {
-    return NUMAP_SUCCESS;
+    to_redef = create_prot_perm_cycle_type(cycle_type);
+    //printf("\n\n\n");
+    //numap_print(to_redef);
+    for (int i = 0; i < 3; i++) {
+        unsigned int a = rand() % to_redef->size_d;
+        //printf("\ni = %d\n a = %d", i, a);
+        unsigned int b = rand() % to_redef->size_d;
+        //printf("\ni = %d\n b = %d", i, b);
+
+        numap_perm_conjugation_with_swap(to_redef, a, b);
+        //printf("\n\n\n ff ");
+        //numap_print(to_redef);
+    }
+    /*printf("\n\n\n f ");
+    numap_print(to_redef);*/
+    return to_redef;
 }
