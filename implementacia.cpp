@@ -14,17 +14,22 @@ int main()
 
     numap_print(test);
     SEQ* a = (SEQ*)malloc(sizeof(SEQ));
-    a->size = 4;
+    a->size = 2;
     a->seq = (unsigned int*)malloc(sizeof(int) * a->size);
-    a->seq[0] = 7;
-    a->seq[1] = 11;
-    a->seq[2] = 4;
-    a->seq[3] = 5;
-    numap_rand_perm_cycle_type(test, a);
+    a->seq[0] = 4;
+    a->seq[1] = 5;
+    //a->seq[2] = 4;
+    //a->seq[3] = 5;
+    //numap_rand_perm_cycle_type(test, a);
+    NUMAP* test2 = numap_create_empty();
+    test2 = create_prot_perm_cycle_type(a);
     printf("\n\n\n");
-    numap_print(test);
-    printf("numap domain: %d\n", test->size_d);
-    printf("numap codomain: %d\n", test->size_cod);
+    numap_print(test2);
+    printf("numap domain: %d\n", test2->size_d);
+    printf("numap codomain: %d\n", test2->size_cod);
+    numap_perm_conjugation_with_swap(test2, 3, 7);
+    printf("\n\n\n");
+    numap_print(test2);
     return 0;
 }
 
